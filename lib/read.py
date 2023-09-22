@@ -5,6 +5,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -43,6 +46,13 @@ def netCDF(dataPath, filename, nc_variable, grid=None, level=None):
     Because some models have calendars not supported by datetime, non supported dates are removed. Otherwise dates
     should be managed as strings yyyymmdd in the whole project.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     start = datetime.datetime.now()
     if filename[-3:] != '.nc':
@@ -184,6 +194,13 @@ def one_direct_predictor(predName, level=None, grid=None, model='reanalysis', sc
     :return: dictionary with data, times, lats, lons and calendar
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     if level is not None:
         predName += str(level)
 
@@ -257,6 +274,13 @@ def lres_data(targetVar, field, grid=None, model='reanalysis', scene=None, predN
     Beware that different GCMs can have different calendars
     return: data (ndays, npreds, nlats, nlons) and times
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define variables
     if field == 'var':
@@ -688,6 +712,13 @@ def hres_metadata(targetVar, GCM_local=None, RCM_local=None, pathIn=None):
     :return:
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     if pathIn is not None:
         dataPath = pathIn
     elif GCM_local is not None:
@@ -717,6 +748,13 @@ def hres_data(targetVar, period=None):
     at settings.
     PeriodFilename: returns only data from selected period
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     filename = pathHres + targetVar + '_' + hresPeriodFilename[targetVar]
 

@@ -5,6 +5,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -42,6 +45,13 @@ def Clausius_Clapeyron(t, units_kelvin=True):
     :return: saturation vapor pressure
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     t0 = 273.15
     L = 2.5 * 10 ** 6
     Rv = 461
@@ -64,6 +74,13 @@ def Clausius_Clapeyron_inverse(es):
     :return: temperature in Kelvin
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     t0 = 273.15
     L = 2.5 * 10 ** 6
     Rv = 461
@@ -85,6 +102,13 @@ def SSI_index(model='reanalysis', scene='TESTING'):  # author: Carlos Correa ; e
     tp500 is the temperature of the parcel at 500 hPa when lifted from 850 hPa"""
     from scipy.optimize import fmin
     # from scipy.optimize import fsolve --> it was added in /config/imports.py
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Prepare times
     times = read.one_direct_predictor('ta', level=850, grid='ext', model=model, scene=scene)['times']
@@ -197,6 +221,13 @@ def LI_index(model='reanalysis', scene='TESTING'):  # author: Carlos Correa ; em
     where:
     t500 is the measured temperature at 500 hPa
     tp500 is the temperature of the parcel at 500 hPa when lifted from surface pressure"""
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # from scipy.optimize import fsolve --> it was added in /config/imports.py
 
@@ -315,6 +346,13 @@ def LI_index(model='reanalysis', scene='TESTING'):  # author: Carlos Correa ; em
 def K_index(model='reanalysis', scene='TESTING'):
     """    Instability index:    K-Index (K) = (T850 - T500) + Td850 - (T700 - Td700)     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Prepare times
     times = read.one_direct_predictor('ta', level=850, grid='ext', model=model, scene=scene)['times']
 
@@ -334,6 +372,13 @@ def K_index(model='reanalysis', scene='TESTING'):
 def TT_index(model='reanalysis', scene='TESTING'):
     """    Total Totals index:  TT = (T850 – T500) + (Td850 – T500)  =   T850 + Td850 – 2(T500)     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Prepare times
     times = read.one_direct_predictor('ta', level=850, grid='ext', model=model, scene=scene)['times']
 
@@ -352,6 +397,13 @@ def aux_sfcWind_direct(level, model, scene):
     """get wind speed directly
     level: sfc or pressure level in mb
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if level == 'sfc':
         if model == 'reanalysis':
@@ -380,6 +432,13 @@ def aux_sfcWind_from_uas_vas(level, model, scene):
     """get wind speed indirectly from wind components
     level: sfc or pressure level in mb
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if level == 'sfc':
         if model == 'reanalysis':
@@ -415,6 +474,13 @@ def wind_speed(level, model='reanalysis', scene='TESTING'):
     level: sfc or pressure level in mb
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     try:
         aux = aux_sfcWind_direct(level, model=model, scene=scene)
         sfcWind, times = aux['data'], aux['times']
@@ -438,6 +504,13 @@ def aux_r_direct(level, model, scene):
     """get relative humidity directly
     level: sfc or pressure level in mb
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if level == 'sfc':
         if model == 'reanalysis':
@@ -466,6 +539,13 @@ def aux_r_from_q(level, model, scene):
     """get relative humidity indirectly from specific humidity
     level: sfc or pressure level in mb
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if level == 'sfc':
         if model == 'reanalysis':
@@ -514,6 +594,13 @@ def aux_r_from_Td(level, model, scene):
     level: sfc or pressure level in mb
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     if level == 'sfc':
         if model == 'reanalysis':
             aux = read.one_direct_predictor('tas', grid='ext', model=model, scene=scene)
@@ -557,6 +644,13 @@ def relative_humidity(level, model='reanalysis', scene='TESTING'):
     level: sfc or pressure level in mb
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     try:
         aux = aux_r_direct(level, model=model, scene=scene)
         r, times = aux['data'], aux['times']
@@ -587,6 +681,13 @@ def aux_q_direct(level, model, scene):
     level: sfc or pressure level in mb
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     if level == 'sfc':
         if model == 'reanalysis':
             aux = read.one_direct_predictor('huss', grid='ext', model=model, scene=scene)
@@ -614,6 +715,13 @@ def aux_q_from_r(level, model, scene):
     """get specific humidity indirectly from relative humidity
     level: sfc or pressure level in mb
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if level == 'sfc':
         if model == 'reanalysis':
@@ -654,6 +762,13 @@ def aux_q_from_Td(level, model, scene):
     """get relative humidity indirectly from specific humidity
     level: sfc or pressure level in mb (if sfc, surface pressure will be converted to mb)
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if level == 'sfc':
         if model == 'reanalysis':
@@ -707,6 +822,13 @@ def specific_humidity(level, model='reanalysis', scene='TESTING'):
     level: sfc or pressure level in mb
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     try:
         aux = aux_q_direct(level, model=model, scene=scene)
         q, times = aux['data'], aux['times']
@@ -733,6 +855,13 @@ def aux_Td_direct(level, model, scene):
     """get dew point directly
     level: sfc or pressure level in mb
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if level == 'sfc':
         if model == 'reanalysis':
@@ -761,6 +890,13 @@ def aux_Td_from_q(level, model, scene):
     """get dew point indirectly from specific humidity
     level: sfc or pressure level in mb (if sfc, surface pressure will be converted to mb)
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if level == 'sfc':
         if model == 'reanalysis':
@@ -814,6 +950,13 @@ def aux_Td_from_r(level, model, scene):
     level: sfc or pressure level in mb
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     if level == 'sfc':
         if model == 'reanalysis':
             aux = read.one_direct_predictor('tas', grid='ext', model=model, scene=scene)
@@ -850,6 +993,13 @@ def dew_point(level, model='reanalysis', scene='TESTING'):
     level: sfc or pressure level in mb
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     try:
         aux = aux_Td_direct(level, model=model, scene=scene)
         td, times = aux['data'], aux['times']
@@ -876,6 +1026,13 @@ def dew_point(level, model='reanalysis', scene='TESTING'):
 def vtg(level0, level1, model='reanalysis', scene='TESTING'):
     """Gradient thermal vertical between level0 and level1 hPa"""
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Read data
     if model == 'reanalysis':
         aux = read.one_direct_predictor('ta', level=level1, grid='ext', model=model, scene=scene)
@@ -897,6 +1054,13 @@ def vtg(level0, level1, model='reanalysis', scene='TESTING'):
 ########################################################################################################################
 def vorticity_and_divergence(model='reanalysis', scene='TESTING', level=None):
     """Vorticity and divergence"""
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Read data
     if model == 'reanalysis':
@@ -956,6 +1120,13 @@ def vorticity_and_divergence(model='reanalysis', scene='TESTING', level=None):
 def psl_trend(model='reanalysis', scene='TESTING'):
     """psl trend from previous day"""
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Read data
     if model == 'reanalysis':
         aux = read.one_direct_predictor('psl', level=None, grid='ext', model=model, scene=scene)
@@ -978,6 +1149,13 @@ def psl_trend(model='reanalysis', scene='TESTING'):
 def insolation(model='reanalysis', scene='TESTING'):
     """Theoretical insolation as sin function (between 0 and 1)"""
     pi = 3.14
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Read data
     # if model == 'reanalysis':
@@ -1020,6 +1198,13 @@ def geostrophic(model='reanalysis', scene='TESTING'):
     g = 9.8  # Gravity
     pi = 3.14159
     omega = 2 * pi / 86400  # Angular velocity
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Read data
     if model == 'reanalysis':

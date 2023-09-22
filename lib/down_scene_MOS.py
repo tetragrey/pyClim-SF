@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -37,6 +40,13 @@ def downscale_chunk(targetVar, methodName, family, mode, fields, scene, model, i
     This function goes through all points (regression).
     The result is saved as npy file (each chunk is one file).
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # create chunks
     n_chunks = nproc
@@ -178,6 +188,13 @@ def collect_chunks(targetVar, methodName, family, mode, fields, scene, model, n_
     print('--------------------------------------')
     print(scene, model, 'collect chunks', n_chunks)
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Gets scene dates
     if scene == 'TESTING':
         scene_dates = testing_dates
@@ -267,6 +284,10 @@ def collect_chunks(targetVar, methodName, family, mode, fields, scene, model, n_
 ########################################################################################################################
 
 if __name__=="__main__":
+
+    fname = 'Calling down_scene_MOS __main__' + "\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     nproc = MPI.COMM_WORLD.Get_size()         # Size of communicator
     iproc = MPI.COMM_WORLD.Get_rank()         # Ranks in communicator

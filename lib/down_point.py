@@ -5,6 +5,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -49,6 +52,13 @@ def ANA_pr(syn_dist, weather_type_id, iana, pred_scene, var_scene, pred_calib, v
     :param estimation_method:
     :return: est
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     mode = 'PP'
 
@@ -133,6 +143,13 @@ def ANA_others(targetVar, iana, pred_scene, var_scene, pred_calib, var_calib, ob
     Return: array of estimated temperature
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     mode = 'PP'
 
     # Interpolate and reshapes for regression
@@ -198,6 +215,13 @@ def TF_others(X, reg_ipoint, targetVar):
     Return: array of estimated temperature
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     try:
         Y = reg_ipoint.predict(X, verbose=0)
     except:
@@ -222,6 +246,13 @@ def TF_pr(methodName, X, clf_ipoint, reg_ipoint):
     This function downscale a particular point.
     Return: array of estimated precipitation
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if 'sklearn' in str(type(clf_ipoint)):
         if classifier_mode == 'probabilistic':

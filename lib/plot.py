@@ -5,6 +5,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -45,6 +48,14 @@ def lighten_color(color, amount=0.5):
     >> lighten_color('#F034A3', 0.6)
     >> lighten_color((.3,.55,.1), 0.5)
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     import matplotlib.colors as mc
     import colorsys
     try:
@@ -60,6 +71,13 @@ def feature_importances(estimator, targetVar, methodName, ipoint, estimatorType)
     '''
     Plot feature_importances
     '''
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     pathOut = pathAux + 'TRAINED_MODELS/' + targetVar.upper() + '/' + methodName + '/hyperparameters/'
 
@@ -94,6 +112,13 @@ def hyperparameters(estimator, targetVar, methodName, ipoint, estimatorType):
     '''
     Plot hyperparameters
     '''
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     pathOut = pathAux + 'TRAINED_MODELS/' + targetVar.upper() + '/' + methodName + '/hyperparameters/'
 
@@ -148,6 +173,13 @@ def epochs(estimator, targetVar, methodName, ipoint, estimatorType, history):
     Plot loss and metric vs epochs
     '''
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     pathOut = pathAux + 'TRAINED_MODELS/' + targetVar.upper() + '/' + methodName + '/hyperparameters/'
 
     try:
@@ -197,6 +229,13 @@ def nEstimators(estimator, targetVar, methodName, ipoint, estimatorType, history
     Plot loss and metric vs epochs
     '''
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     pathOut = pathAux + 'TRAINED_MODELS/' + targetVar.upper() + '/' + methodName + '/hyperparameters/'
 
     try:
@@ -236,6 +275,13 @@ def hyperparameters_epochs_nEstimators_featureImportances(estimator, targetVar, 
     Plot hyperparameters or epochs to analyze the machine learning method tuning
     '''
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     if methodName in ('RF', 'XGB'):
         feature_importances(estimator, targetVar, methodName, ipoint, estimatorType)
 
@@ -252,6 +298,14 @@ def area_of_study():
     '''
     Plot regions for different weighting for synoptic analogy
     '''
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     lat_up, lat_down = pred_lat_up + grid_res * 6, pred_lat_down - grid_res * 6
     lon_left, lon_right = pred_lon_left - grid_res * 9, pred_lon_right + grid_res * 9
     nlats = int(((lat_up - lat_down) / 1.5) + 1)
@@ -338,6 +392,14 @@ def spatial_domains():
     '''
     Plot regions for different weighting for synoptic analogy
     '''
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     lat_up, lat_down = pred_lat_up + grid_res * 5, pred_lat_down - grid_res * 6
     lon_left, lon_right = pred_lon_left - grid_res * 10, pred_lon_right + grid_res * 10
     nlats = int(((lat_up - lat_down) / 1.5) + 1)
@@ -437,6 +499,13 @@ def weights_regions():
     Plot regions for different weighting for synoptic analogy
     '''
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     w = W_saf[:saf_nlats * saf_nlons].reshape(saf_nlats, saf_nlons)
 
     # Define map
@@ -487,6 +556,14 @@ def weights_regions():
 
 ########################################################################################################################
 def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     new_cmap = colors.LinearSegmentedColormap.from_list(
         'trunc({n},{a:.2f},{b:.2f})'.format(n=cmap.name, a=minval, b=maxval),
         cmap(np.linspace(minval, maxval, n)))
@@ -531,6 +608,13 @@ def map(targetVar, data, palette=None, lats=[None, None], lons=[None, None], pat
     :param plot_lat_lon: plot x_ticks and y_ticks
     :return: void
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if (filename is not None) and (not os.path.exists(path)):
         os.makedirs(path)

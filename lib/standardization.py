@@ -1,5 +1,8 @@
 import sys
 
+import grasptools
+import inspect
+
 import numpy as np
 
 sys.path.append('../config/')
@@ -40,6 +43,13 @@ def get_mean_and_std_reanalysis(targetVar, fields_and_grid):
     Calculates mean and standard deviation for reanalysis and models and all predictors.
     The time period used is the one with data from both reanalysis and models historical: 1980-2005.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # For pred (local predictors) and saf (synoptic analogy fields), fields and grid (spatial domain) are the same,
     # but for spred (synoptic predictors), fields are predictors and grid is synoptic
@@ -88,6 +98,13 @@ def get_mean_and_std_reanalysis(targetVar, fields_and_grid):
 ########################################################################################################################
 def get_mean_and_std_oneModel(targetVar, fields_and_grid, model):
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('get_mean_and_std_oneModel', targetVar, fields_and_grid, model)
 
     if fields_and_grid == 'pred':
@@ -135,6 +152,13 @@ def get_mean_and_std_oneModel(targetVar, fields_and_grid, model):
 ########################################################################################################################
 def standardize(targetVar, data, model, fields_and_grid):
     """Provided the data array, it is standardized and returned """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     pathIn=pathAux+'STANDARDIZATION/'+fields_and_grid.upper()+'/'+targetVar.upper()+'/'
     warnings.filterwarnings("ignore")

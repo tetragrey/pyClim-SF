@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -36,6 +39,13 @@ import write
 ########################################################################################################################
 def down_day(targetVar, pred_scene, saf_scene, var_scene, pred_calib, saf_calib, var_calib, obs, corr, coef, intercept,
              centroids, i_4nn, j_4nn, w_4nn, methodName):
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Creates empty array for results
     est = np.zeros((hres_npoints[targetVar]))

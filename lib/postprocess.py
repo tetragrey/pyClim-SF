@@ -6,6 +6,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -39,6 +42,13 @@ def bias_correction():
     """
     Bias correction of projections and get climdex from bias corrected daily data.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define list for multiprocessing
     iterable = []
@@ -77,6 +87,13 @@ def bias_correction_renalysis(targetVar, methodName):
     """
     Apply bias correction for a specific model.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('postprocess.bias_correction_renalysis', targetVar, methodName, bc_sufix)
 
@@ -153,6 +170,13 @@ def bias_correction_allModels(targetVar, methodName):
     Check for methods/models not yet corrected and applie bias correction
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('postprocess.bias_correction_allModels', targetVar, methodName, bc_sufix)
 
 
@@ -227,6 +251,13 @@ def bias_correction_oneModel(targetVar, methodName, model):
     Apply bias correction for a specific model.
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('postprocess.bias_correction_oneModel', model, targetVar, methodName, bc_sufix)
 
     if model == 'reanalysis':
@@ -281,6 +312,13 @@ def get_climdex():
     Calls to get_climdex_for_evaluation (reanalysis) or get_climdex_allModels (models)
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Define list for multiprocessing
     iterable = []
 
@@ -310,6 +348,13 @@ def get_climdex_for_evaluation(targetVar, methodName):
     Calculate climdex for evaluation
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('get_climdex_for_evaluation', methodName)
 
     if apply_bc == False:
@@ -336,6 +381,14 @@ def get_climdex_allModels(targetVar, methodName):
     """
     Check if climdex/scene/model already exists, and if not, calculate it,
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('postprocess.calculate_climdex', targetVar, methodName)
 
     # Define and create paths
@@ -417,6 +470,14 @@ def get_climdex_oneModel(targetVar, methodName, model):
     """
     Calculates all climdex for a specific model.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('get_climdex_oneModel', targetVar, methodName, model)
 
     # Define and create paths
@@ -476,6 +537,13 @@ def plot_results():
     Divide by subregions and generate graphics for EVALUATION or for PROJECTIONS
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Establish subregions for each point
     for targetVar in targetVars:
         grids.subregions(targetVar)
@@ -496,6 +564,13 @@ def nc2ascii():
     """
     netCDFs to ASCII.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     pathOutBase = '../results/'+experiment+bc_sufix+'_ASCII/'
 
@@ -571,6 +646,11 @@ def nc2ascii():
 
 ########################################################################################################################
 if __name__ == "__main__":
+
+    fname = 'Calling postprocess __main__' + "\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     nproc = MPI.COMM_WORLD.Get_size()  # Size of communicator
     iproc = MPI.COMM_WORLD.Get_rank()  # Ranks in communicator
     inode = MPI.Get_processor_name()  # Node where this MPI process runs

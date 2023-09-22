@@ -46,12 +46,6 @@ from sklearn.model_selection import train_test_split
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import absl.logging
 absl.logging.set_verbosity(absl.logging.ERROR)
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers, models
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.models import load_model
-from tensorflow.keras import backend as K
 from xgboost import XGBClassifier, XGBRegressor
 from scipy.stats import spearmanr
 from scipy.stats import pearsonr
@@ -102,3 +96,18 @@ import val_lib
 import WG_lib
 import write
 
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers, models
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import load_model
+from tensorflow.keras import backend as K
+from xgboost import XGBClassifier, XGBRegressor
+from scipy.stats import spearmanr
+from scipy.stats import pearsonr
+from scipy.ndimage import gaussian_filter1d
+from scipy.stats import gamma
+from scipy.stats import norm
+from scipy.signal import detrend
+from scipy.optimize import fsolve
+from scipy.stats import wasserstein_distance

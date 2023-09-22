@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -37,6 +40,13 @@ def train_PCA():
 	"""
 	Train PCA of sinoptic analogy fields preserving n_components needed to explain exp_var_ratio_th (advanced_settings)
 	"""
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
 
 	# Define pathOut
 	pathOut = pathAux + 'PCA/'
@@ -82,6 +92,13 @@ def set_number_of_weather_types():
 
 	Some parameters of both MiniBatchKmeans and Kmeans might need to be tuned.
 	"""
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
 
 	print('weather_types: set number of clusters')
 	# Define clustering method
@@ -165,6 +182,13 @@ def get_weather_types_centroids():
 
 	Some parameters of both MiniBatchKmeans and Kmeans might need to be tuned.
 	"""
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
 
 	print('weather_types: get centroids')
 
@@ -254,6 +278,13 @@ def get_weather_type_id(scene, centroids):
 	:return: the id of the weather type and the distance to the centroid
 	"""
 
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
+
 	# Format to scene and centroids
 	scene = np.repeat(scene, k_clusters, 0)
 	scene = scene.reshape(scene.shape[0], -1)
@@ -274,6 +305,13 @@ def get_synoptic_distances(calib, scene):
 	:param scene: (1, nPC)
 	:return: dist: (ndays)
 	'''
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
 
 	# Format to scene and calib
 	scene = np.repeat(scene, calib.shape[0], 0)
@@ -296,6 +334,13 @@ def get_local_distances(pred_calib, pred_scene, ipred):
 	:return: dist: (n_analogs_preselection,)
 	"""
 
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
+
 	# Format to pred_calib and pred_scene
 	pred_calib = pred_calib[:,ipred]
 	pred_scene = pred_scene[:,ipred]
@@ -312,6 +357,13 @@ def get_local_distances(pred_calib, pred_scene, ipred):
 def coefficients(targetVar, methodName, mode, iproc=0, nproc=1):
 	"""
 	"""
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
 
 	mode = 'PP'
 
@@ -423,6 +475,13 @@ def coefficients(targetVar, methodName, mode, iproc=0, nproc=1):
 ########################################################################################################################
 def coefficients_collect_chunks(targetVar, methodName, mode, nproc=1):
 
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
+
 	# Define pathOut
 	pathOut=pathAux+'COEFFICIENTS/'
 
@@ -464,6 +523,13 @@ def correlations(targetVar, methodName, mode, iproc=0, nproc=1, th_metric='media
 	Nevertheless no regression will be performed. These predictors will be used only to search analogy in them.
 
 	"""
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
 
 	pr_th_for_corr = 0.1 # mm
 
@@ -590,6 +656,13 @@ def correlations(targetVar, methodName, mode, iproc=0, nproc=1, th_metric='media
 ########################################################################################################################
 def correlations_collect_chunks(targetVar, methodName, mode, nproc=1):
 
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
+
 	# Define pathOut
 	pathOut=pathAux+'COEFFICIENTS/'
 
@@ -617,6 +690,11 @@ def correlations_collect_chunks(targetVar, methodName, mode, nproc=1):
 
 ########################################################################################################################
 if __name__ == "__main__":
+
+	fname = 'Calling ANA_lib __main__' + "\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
+
 	nproc = MPI.COMM_WORLD.Get_size()  # Size of communicator
 	iproc = MPI.COMM_WORLD.Get_rank()  # Ranks in communicator
 	inode = MPI.Get_processor_name()  # Node where this MPI process runs

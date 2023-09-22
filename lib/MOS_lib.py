@@ -7,6 +7,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -49,6 +52,13 @@ def quantile_mapping(obs, hist, sce, targetVar):
     Themeßl, M.J., Gobiet, A. and Leuprecht, A. (2011), Empirical-statistical downscaling and error correction of daily
     precipitation from regional climate models. Int. J. Climatol., 31: 1530-1544. https://doi.org/10.1002/joc.2168
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define parameters and variables
     nPoints, nDays_ref, nDays_sce = obs.shape[1], obs.shape[0], sce.shape[1]
@@ -107,6 +117,13 @@ def detrended_quantile_mapping(obs, hist, sce, targetVar, th=0.05):
     Do Methods Preserve Changes in Quantiles and Extremes?. J. Climate, 28, 6938–6959,
     https://doi.org/10.1175/JCLI-D-14-00754.1
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define parameters and variables
     nPoints, nDays_ref, nDays_sce = obs.shape[1], obs.shape[0], sce.shape[1]
@@ -210,6 +227,13 @@ def quantile_delta_mapping(obs, hist, sce, targetVar, sce_times, default_th=0.05
     Vrac, M., Noël, T., and Vautard, R. (2016), Bias correction of precipitation through Singularity Stochastic Removal:
     Because occurrences matter, J. Geophys. Res. Atmos., 121, 5237– 5258, doi:10.1002/2015JD024511
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define specific thresholds for 'zero value' for each targetVar
     th_dict = {'tas': None, 'tasmax': None, 'tasmin': None, 'pr': None, 'uas': None, 'vas': None, 'sfcWind': None,
@@ -345,6 +369,13 @@ def scaled_distribution_mapping(obs, hist, sce, targetVar, *args, **kwargs):
     Scaled distribution mapping: a bias correction method that preserves raw climate model projected changes, Hydrol.
     Earth Syst. Sci., 21, 2649–2666, https://doi.org/10.5194/hess-21-2649-2017
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     cdf_th = kwargs.get('cdf_th', 0.99999)
     if targetVar == 'pr':
@@ -519,6 +550,13 @@ def biasCorrect_as_postprocess(obs, hist, sce, targetVar, ref_times, sce_times):
     * sce (nDaysSce, nPoints): the scenario data that shall be corrected
     :return:
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if targetVar == 'huss':
         print('huss modification /1000...')

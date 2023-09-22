@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -43,6 +46,13 @@ def interpolate_predictors(pred, i_4nn, j_4nn, w_4nn, interp):
     :return: predOut(ndays, npreds)
     '''
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     warnings.filterwarnings("ignore")
 
     # Define npreds, ndays, predOut
@@ -73,6 +83,13 @@ def association(interp, targetVar):
     Outpus: csv file containing list of hight resolution points with coordinates of nearest low resolution point and
     distance to it
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('grids.association() starts')
 
@@ -214,6 +231,13 @@ def subregions(targetVar):
 
     For a new project shapefiles and regTypes must be defined.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('calculating subregions', targetVar)
 

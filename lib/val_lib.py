@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -55,6 +58,13 @@ class TaylorDiagram(object):
         * srange: stddev axis extension, in units of *refstd*
         * extend: extend diagram to negative correlations
         """
+
+        frame = inspect.currentframe()
+        function_name = inspect.getframeinfo(frame).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         from matplotlib.projections import PolarAxes
         import mpl_toolkits.axisartist.floating_axes as FA
@@ -132,6 +142,13 @@ class TaylorDiagram(object):
         `Figure.plot` command.
         """
 
+        frame = inspect.currentframe()
+        function_name = inspect.getframeinfo(frame).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         l, = self.ax.plot(np.arccos(corrcoef), stddev,
                           *args, **kwargs)  # (theta, radius)
         self.samplePoints.append(l)
@@ -145,6 +162,14 @@ class TaylorDiagram(object):
         diagram. *args* and *kwargs* are directly propagated to the
         `Figure.plot` command.
         """
+
+        frame = inspect.currentframe()
+        function_name = inspect.getframeinfo(frame).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         theta0, radius0 = np.arccos(corrcoef_0), stddev_0
         theta1, radius1 = np.arccos(corrcoef_1), stddev_1
         d_theta, d_radius = theta1-theta0, radius1-radius0
@@ -183,6 +208,13 @@ def daily_boxplots(metric, by_season):
     :param methods:
     :param by_season: boolean
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     vars = []
     for method in methods:
@@ -358,6 +390,13 @@ def daily_spatial_correlation_boxplots():
     :param methods:
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     methods.reverse()
 
     vars = []
@@ -501,6 +540,13 @@ def climdex_boxplots(by_season):
     :param by_season: boolean
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     vars = []
     for method in methods:
         var = method['var']
@@ -619,6 +665,13 @@ def climdex_Taylor_diagrams(by_season):
     :param by_season: boolean
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     vars = []
     for method in methods:
         var = method['var']
@@ -728,6 +781,13 @@ def monthly_boxplots(metric):
     Boxplots of metric,  by subregions (optional).
     :param metric: correlation or variance
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     vars = []
     for method in methods:
@@ -868,6 +928,13 @@ def monthly_maps(metric, targetVar, methodName):
     metric: correlation or R2
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('monthly', metric, targetVar, methodName)
 
     # Read data
@@ -914,6 +981,13 @@ def QQplot(targetVar, methodName, obs, est, pathOut, season):
     '''
     Save scatter plot of several percentiles of daily data distribution
     '''
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Create pathOut
     if plotAllRegions == False:
@@ -977,6 +1051,13 @@ def continuous(targetVar, methodName, obs, est, pathOut, season):
     - Hist2d sorted distributions (performed on a selection of 5000 random points (otherwise memory limit might be exceeded)
     '''
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('validate continuous scores', targetVar, methodName)
 
     if plotAllRegions == False:
@@ -1014,6 +1095,14 @@ def dichotomous(targetVar, methodName, obs, est, pathOut, season):
     Plots the following figures for the whole testing period:
     Accuracy (proportion of correct classified)
     '''
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('validate dichotomous scores', targetVar, methodName)
 
     if plotAllRegions == False:

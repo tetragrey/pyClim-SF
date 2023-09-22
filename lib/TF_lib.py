@@ -1,5 +1,8 @@
 import sys
 
+import grasptools
+import inspect
+
 import keras.layers
 
 sys.path.append('../config/')
@@ -40,6 +43,13 @@ def train_chunk(targetVar, methodName, family, mode, fields, iproc=0, nproc=1):
     '''
     Calibrates regression for all points,divided in chunks if run at HPC.
     '''
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define pathOut
     pathOut = pathAux + 'TRAINED_MODELS/' + targetVar.upper() + '/' + methodName + '/'
@@ -151,6 +161,13 @@ def train_chunk(targetVar, methodName, family, mode, fields, iproc=0, nproc=1):
 def fit_and_prevent_constant_output(model, X, y, ipoint):
     """This function fits ANN/CNN and checks for potential constant ouptuts recalibrating if neccessary"""
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Define callbacks for neural networks training
     tf_nn_callbacks = [
         tf.keras.callbacks.EarlyStopping(
@@ -194,6 +211,13 @@ def train_point(targetVar, methodName, X, y, ipoint):
     '''
     Train model (classifiers and regressors)
     '''
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     classifier = None
     regressor = None
@@ -461,6 +485,10 @@ def train_point(targetVar, methodName, X, y, ipoint):
 ########################################################################################################################
 
 if __name__=="__main__":
+
+    fname = 'Calling TF_lib __main__' + "\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     nproc = MPI.COMM_WORLD.Get_size()         # Size of communicator
     iproc = MPI.COMM_WORLD.Get_rank()         # Ranks in communicator

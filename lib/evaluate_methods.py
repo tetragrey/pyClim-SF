@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -37,6 +40,13 @@ def annual_cycle():
     """
     Plots annual cycle by subregions (optional) for all methods together.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     for targetVar in targetVars:
 
@@ -154,6 +164,13 @@ def daily_data(by_season=True):
     each method.
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # RMSE, correlation and biasVariance boxplots of all methods together
     val_lib.daily_boxplots('rmse', by_season)
     val_lib.daily_boxplots('correlation', by_season)
@@ -229,6 +246,13 @@ def monthly_data():
     Plots monthly accumulated correlation maps of pcp.
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     val_lib.monthly_boxplots('correlation')
     val_lib.monthly_boxplots('R2')
 
@@ -246,6 +270,13 @@ def climdex(by_season=True):
     """
     Plots bias boxplots of all methods, and bias maps of mean climdex and scatter plot mean climdex for  each method.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Bias boxplots of all methods together
     val_lib.climdex_boxplots(by_season)

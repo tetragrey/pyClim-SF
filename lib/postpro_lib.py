@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -37,6 +40,14 @@ def calculate_all_climdex(pathOut, filename, targetVar, data, times, ref, times_
     """
     Calculate all climdex/season and save them into files.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     start = datetime.datetime.now()
 
     # Create path for results
@@ -198,6 +209,13 @@ def calculate_climdex(climdex_name, data, ref, times, times_ref):
 
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     warnings.filterwarnings("ignore", message="invalid value encountered in greater")
     warnings.filterwarnings("ignore", message="invalid value encountered in less")
     warnings.filterwarnings("ignore", message="Mean of empty slice")
@@ -331,6 +349,13 @@ def get_perc_calendar(targetVar, times, data, q):
     :return: percCalendar: numpy array (365, npoints)
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     data = (100 * data).astype(predictands_codification[targetVar]['type'])
 
     # Create empty percCalendar
@@ -369,6 +394,13 @@ def get_season(data, times, season):
             times_season: list of dates season
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Get season positions
     idates = [i for i in range(len(times)) if times[i].month in season_dict[season]]
     data = data[idates]
@@ -385,6 +417,13 @@ def get_spell_duration(a, climdex_name):
     :return: (nPoints): for each point, the sum of days with value 1, only counting those inside groups of at least 6
         consequtive.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     nPoints = a.shape[1]
 
@@ -424,6 +463,13 @@ def get_data_eval(targetVar, methodName):
     :return: dictionaty with 'ref', 'times_ref', 'obs', 'est', 'times_scene', 'path'
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     if apply_bc == False:
         pathIn = '../results/EVALUATION/' + targetVar.upper() + '/' + methodName + '/daily_data/'
     else:
@@ -448,6 +494,13 @@ def get_data_projections(n_histYears, n_sspYears, npoints, targetVar, climdex_na
     """
     Get data projections. Return ssp_dict with model names and change.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     if experiment == 'EVALUATION':
         print('Invalid experiment for get_data_projections')
@@ -516,6 +569,13 @@ def figures_projections(lan='EN'):
 
     For evolution graphs, all the region is reduced to one value per year/model/scene.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
 
     implemented_climdex = ['TXm', 'TXx', 'TXn', 'TX90p', 'TX10p', 'WSDI',
@@ -673,6 +733,13 @@ def figures_projections(lan='EN'):
 def trend_raw(pathOut, subDir, ssp_dict, raw_ssp_dict, climdex_name, hist_years_local, ssp_years_local, ylim, ylabel,
               season, targetVar, methodName, regType, regName, xlabel, add_historical=True):
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('evolTrendRaw', methodName, targetVar, climdex_name, season)
     for scene in collections.OrderedDict(sorted(ssp_dict.items())).keys():
         if scene != 'historical':
@@ -816,6 +883,13 @@ def trend_raw(pathOut, subDir, ssp_dict, raw_ssp_dict, climdex_name, hist_years_
 def csv_evol(pathOut, subDir, nYears, ssp_dict, years, climdex_name, season):
     """Write csv with data for evolution graphs"""
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('csv_evol', climdex_name, season)
     if not os.path.exists(pathOut + 'csv/' + subDir):
         os.makedirs(pathOut + 'csv/' + subDir)
@@ -838,6 +912,13 @@ def csv_evol(pathOut, subDir, nYears, ssp_dict, years, climdex_name, season):
 def spaghetti(pathOut, subDir, ssp_dict, years, ylim, climdex_name, ylabel, season, targetVar,
               methodName, regType, regName, xlabel):
     """Plot evolution graphs all models"""
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('spaghetti', methodName, targetVar, climdex_name, season)
 
@@ -894,6 +975,13 @@ def spaghetti(pathOut, subDir, ssp_dict, years, ylim, climdex_name, ylabel, seas
 def tube(pathOut, subDir, ssp_dict, climdex_name, hist_years_local, ssp_years_local, ylim, ylabel, season, targetVar,
          methodName, regType, regName, xlabel, add_historical=True):
     """Plot evolution graphs mean and spread"""
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('tube', methodName, targetVar, climdex_name, season)
 
@@ -977,6 +1065,13 @@ def tube(pathOut, subDir, ssp_dict, climdex_name, hist_years_local, ssp_years_lo
 def change_maps(ssp_dict, years, targetVar, methodName, season, climdex_name, pathOut, scene_names_dict):
     """Plot change maps"""
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('change_maps', methodName, targetVar, climdex_name, season)
 
     # Go through all scenes
@@ -1032,6 +1127,13 @@ def format_web_AEMET():
     This function prepare all files needed for web_AEMET: dailyData, maps, evol_graphs, and csv.
     It needs to be adapted. Before runing, make sure to define filenames, etc. properly.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define CMIP number
     cmipNumber = '5'
@@ -1132,6 +1234,13 @@ def format_web_AEMET_maps(targetVar, methodName, df_methods, df_targetType, df_s
                           cmipNumber):
     """Copy change maps with dirs/filenames for the website"""
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Define paths
     pathIn = '../results/PROJECTIONS/' + targetVar.upper() + '/' + methodName + '/' + '/'.join(('climdex', 'figures', 'maps')) + '/'
     pathOut = '../results/web_AEMET/' + df_methods['nameForDir'].values[0] + '_' + df_targetType['nameForDir'].values[0] + '/MAPAS_PROYECCIONES/IMAGENES/'
@@ -1168,6 +1277,13 @@ def format_web_AEMET_maps(targetVar, methodName, df_methods, df_targetType, df_s
 def format_web_AEMET_evolution(targetVar, methodName, df_methods, df_targetType, df_seasons, df_regions, df_vars,
                           cmipNumber):
     """Copy evolution with dirs/filenames for the website"""
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define paths
     pathIn = '../results/PROJECTIONS/' + targetVar.upper() + '/' + methodName + '/' + '/'.join(('climdex', 'figures')) + '/'
@@ -1226,6 +1342,13 @@ def format_web_AEMET_evolution(targetVar, methodName, df_methods, df_targetType,
 ########################################################################################################################
 def format_web_AEMET_dailyData(targetVar, methodName, df_methods, df_targetType, df_vars, to_nc=False):
     """Copy dailyData with dirs/filenames for the website"""
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define and create paths
     pathIn = '../results/PROJECTIONS/' + targetVar.upper() + '/' + methodName + '/daily_data/'

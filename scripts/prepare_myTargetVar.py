@@ -3,6 +3,8 @@
 # If so, activate the variables used as inputs (uas and vas in this case) and config/manual_settings.py as predictors
 # for at least one variable
 
+import grasptools
+import inspect
 
 import sys
 import shutil
@@ -19,6 +21,13 @@ cdo = Cdo()
 ########################################################################################################################
 def prepare_hres():
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     pathIn = '../input_data/hres/'
     os.system('cp '+pathInHres + 'uas_hres_metadata.txt ' + pathInHres + 'sfcWind_hres_metadata.txt')
 
@@ -34,6 +43,13 @@ def prepare_hres():
 ########################################################################################################################
 def prepare_reanalysis():
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     pathIn = '../input_data/reanalysis/'
     aux = read.one_direct_predictor('uas', grid='ext')
     times = aux['times']
@@ -45,6 +61,13 @@ def prepare_reanalysis():
 
 ########################################################################################################################
 def prepare_models(pathOut):
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     pathIn = '../input_data/models/'
     for scene in scene_names_list:
@@ -70,6 +93,13 @@ def prepare_models(pathOut):
 ########################################################################################################################
 def main():
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
 
     prepare_hres()
     prepare_reanalysis()
@@ -79,6 +109,11 @@ def main():
 
 
 if __name__ == "__main__":
+
+    fname = 'Calling prepare_myTargetVar __main__' + "\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     start = datetime.datetime.now()
     main()
     end = datetime.datetime.now()

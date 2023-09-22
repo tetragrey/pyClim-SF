@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -42,6 +45,14 @@ def netCDF(path, filename, varName, data, units, lats, lons, dates, regular_grid
 	"""
 	This function writes data to netCDF file.
 	"""
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
+
 	try:
 		os.makedirs(path)
 	except:
@@ -115,6 +126,13 @@ def netCDF_rotated(path, filename, varName, data, dates):
 	"""
 	This function writes data to netCDF file.
 	"""
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
 
 	try:
 		os.makedirs(path)
@@ -286,6 +304,13 @@ def netCDF_rotated_seasonal_forecast(path, filename, varName, data, year):
 	"""
 	This function writes data to netCDF with the format required for S-ClimWare.
 	"""
+
+	frame = inspect.currentframe()
+	function_name = inspect.getframeinfo(frame).function
+	file_path = os.path.basename(__file__)
+	fname = f"Calling {function_name} in {file_path}\n"
+	roxpath = "roxprint_output.txt"
+	grasptools.roxprint(roxpath, fname)
 
 	try:
 		os.makedirs(path)

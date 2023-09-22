@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -38,6 +41,13 @@ def preprocess():
     Calls to common and to common_fold_dependent
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # If using kfolds, preprocess common is done only for fold1
     if split_mode not in ['fold2', 'fold3', 'fold4', 'fold5']:
         common()
@@ -51,6 +61,13 @@ def common():
     Association between high and low resolution grids
     Standardize reanalysis
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Association between high resolution and low resolution grids, and regions labels.
     for targetVar in targetVars:
@@ -75,6 +92,13 @@ def common_fold_dependent():
     Split training/testing
     Weather types clustering
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Define and create output path
     pathOut = pathAux + 'STANDARDIZATION/VAR/'
@@ -158,6 +182,13 @@ def train_methods():
     """
     Each family of methods needs a different preprocess (training)
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
     
     iterable_TF = []
 

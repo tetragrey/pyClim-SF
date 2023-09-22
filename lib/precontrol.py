@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -37,6 +40,13 @@ def missing_data_check():
     """
     Check for missing data in predictors by GCMs. It can be used to discard some predictors/levels.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('missing_data_check...')
 
@@ -132,6 +142,13 @@ def predictors_correlation():
     Test the correlation of the predictors/predictand relationships. It can be used to select the most relevant predictors
     for the downscaling.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('predictors_correlation...')
 
@@ -233,6 +250,13 @@ def GCMs_evaluation_historical():
     models, synoptic analogy fields... It can be used to discard models/predictors and to detect outliers.
     The comparison is performed in the reference period, when both reanalysis and models exist.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
     
     print('GCMs_evaluation_historical...')
     sceneName = 'historical'
@@ -593,6 +617,13 @@ def GCMs_evaluation_future():
     Test the uncertainty in GCMs in the future, analysing all predictors, models, synoptic analogy fields...
     It can be used to discard models/predictors and to detect outliers.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('GCMs_evaluation_future...')
 
@@ -1031,6 +1062,13 @@ def GCMs_evaluation():
     """
     Evaluate GCMs in a historical period and in the future
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     print('GCMs_evaluation...')
     print(season_dict)

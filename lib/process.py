@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import inspect
+import grasptools
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -37,6 +40,13 @@ def reanalisys(method_dict, scene, model):
     """
     This function calls the down_scene in two different ways depending on the server it is run.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     targetVar = method_dict['var']
     methodName = method_dict['methodName']
@@ -74,6 +84,15 @@ def models(method_dict, scene, model):
     This function checks if method/scene/model has already been downscaled, and if not, it calls the down_scene in two
     different ways depending on the server it is run.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
+
 
     targetVar = method_dict['var']
     methodName = method_dict['methodName']
@@ -165,6 +184,13 @@ def downscale():
     """
     Calls to downscale reanalysis or downscale models/scenes.
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     iterable = []
 

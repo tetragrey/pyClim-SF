@@ -2,6 +2,11 @@ import sys
 import os
 import time
 
+import grasptools
+import inspect
+
+os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
+
 # Save version
 version_last_execution_file = '../config/.version_last_execution.txt'
 version = ''
@@ -28,6 +33,11 @@ if version != version_last_execution:
     text_file.close()
 
 import shutil
+# # Specify a relative path
+# relative_path = '../config/'
+#
+# # Convert the relative path to an absolute path
+# absolute_path = os.path.abspath(relative_path)
 sys.path.append('../config/')
 from manual_settings import *
 if not os.path.isfile('../config/settings.py') or os.stat('../config/settings.py').st_size == 0:
@@ -50,6 +60,14 @@ from PIL import ImageTk,Image
 
 def switch(*args):
     """To change the state of all objects passed as arguments"""
+
+    roxframe = inspect.currentframe()
+    function_name = inspect.getframeinfo(roxframe).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     for object in args:
         if object["state"] == "normal":
             object["state"] = "disabled"
@@ -59,6 +77,14 @@ def switch(*args):
 ########################################################################################################################
 def switch_splitMode(split_modeName, dict):
     """To activate only testing years of the active split mode"""
+
+    roxframe = inspect.currentframe()
+    function_name = inspect.getframeinfo(roxframe).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     for key in dict:
         switcher = dict[key][0]
         entries = dict[key][1:]
@@ -84,6 +110,13 @@ def switch_splitMode(split_modeName, dict):
 def switch_steps(exp, steps, steps_ordered, exp_ordered, chk_only_for_experiment):
     """To enable/disable steps depending on the experiment"""
 
+    roxframe = inspect.currentframe()
+    function_name = inspect.getframeinfo(roxframe).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     for i in range(len(chk_only_for_experiment)):
         object = chk_only_for_experiment[i]
         step = steps_ordered[i]
@@ -95,6 +128,13 @@ def switch_steps(exp, steps, steps_ordered, exp_ordered, chk_only_for_experiment
 
 ########################################################################################################################
 def switch_bc_method(bc_opt, bc_mehods_bt):
+    roxframe = inspect.currentframe()
+    function_name = inspect.getframeinfo(roxframe).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     for object in bc_mehods_bt:
         if bc_opt == 'No':
             object["state"] = "disabled"
@@ -106,6 +146,13 @@ def switch_bc_method(bc_opt, bc_mehods_bt):
 ########################################################################################################################
 def enable(targetVar_active_var, frames):
     """Enable/diable targeVar options"""
+
+    roxframe = inspect.currentframe()
+    function_name = inspect.getframeinfo(roxframe).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     for frame in frames:
         for child in frame.winfo_children():
@@ -128,9 +175,24 @@ def enable(targetVar_active_var, frames):
 def CreateToolTip(widget, text):
     """This function displays information when the mouse cursor is over the object"""
 
+    roxframe = inspect.currentframe()
+    function_name = inspect.getframeinfo(roxframe).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     class ToolTip(object):
 
         def __init__(self, widget):
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             self.widget = widget
             self.tipwindow = None
             self.id = None
@@ -138,6 +200,14 @@ def CreateToolTip(widget, text):
 
         def showtip(self, text):
             "Display text in tooltip window"
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             self.text = text
             if self.tipwindow or not self.text:
                 return
@@ -153,14 +223,38 @@ def CreateToolTip(widget, text):
             label.pack(ipadx=1)
 
         def hidetip(self):
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             tw = self.tipwindow
             self.tipwindow = None
             if tw:
                 tw.destroy()
     toolTip = ToolTip(widget)
     def enter(event):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         toolTip.showtip(text)
     def leave(event):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         toolTip.hidetip()
     widget.bind('<Enter>', enter)
     widget.bind('<Leave>', leave)
@@ -171,6 +265,14 @@ class welcomeMessage(tk.Frame):
     """This function displays a welcome message which can be enabled for next runs"""
 
     def __init__(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         if showWelcomeMessage == True:
             root = tk.Tk()
             root.title("Welcome to pyClim-SDM")
@@ -224,6 +326,14 @@ class welcomeMessage(tk.Frame):
             c.pack(padx=10, pady=10)
             self.run = False
             def run():
+
+                roxframe = inspect.currentframe()
+                function_name = inspect.getframeinfo(roxframe).function
+                file_path = os.path.basename(__file__)
+                fname = f"Calling {function_name} in {file_path}\n"
+                roxpath = "roxprint_output.txt"
+                grasptools.roxprint(roxpath, fname)
+
                 self.run = True
                 root.destroy()
             b = Button(frameMsg, text="Ok", command=run)
@@ -236,6 +346,14 @@ class welcomeMessage(tk.Frame):
             self.showWelcomeMessage_new = False
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.run, self.showWelcomeMessage_new
 
 
@@ -243,6 +361,13 @@ class welcomeMessage(tk.Frame):
 class tabSteps(tk.Frame):
 
     def __init__(self, notebook, root):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         tabSteps = tk.Frame(notebook)
         notebook.add(tabSteps, text='Experiment and Steps')
@@ -373,6 +498,14 @@ class tabSteps(tk.Frame):
 
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.experiment, self.chk_dict, self.all_steps
 
 
@@ -381,6 +514,14 @@ class tabSteps(tk.Frame):
 class tabModelsAndScenes(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         tabModelsAndScenes = tk.Frame(notebook)
         notebook.add(tabModelsAndScenes, text='Models and Scenarios')
 
@@ -388,6 +529,14 @@ class tabModelsAndScenes(tk.Frame):
 
         def add_to_chk_list(frame, name, list, icol, irow, obj=None, affectedBySelectAll=False):
             # Initialize with default settings or last settings
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             checked = tk.BooleanVar(value=False)
             if name in list:
                 checked = tk.BooleanVar(value=True)
@@ -404,9 +553,25 @@ class tabModelsAndScenes(tk.Frame):
         cbuts = []
         buttonWidth = 8
         def select_all():
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             for i in cbuts:
                 i.select()
         def deselect_all():
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             for i in cbuts:
                 i.deselect()
 
@@ -510,6 +675,14 @@ class tabModelsAndScenes(tk.Frame):
         self.chk_dict_scenes.update(add_to_chk_list(frameScenes, 'Others:', scene_names_list, icol, irow, obj=self.otherScenes_Entry)); irow += 1
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.chk_dict_models, self.otherModels_var, self.chk_dict_scenes, self.otherScenes_var, self.reanalysisName_var
 
 
@@ -517,6 +690,13 @@ class tabModelsAndScenes(tk.Frame):
 class tabDomain(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         tabDomain = tk.Frame(notebook)
         notebook.add(tabDomain, text='Domain')
@@ -656,6 +836,14 @@ class tabDomain(tk.Frame):
 
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.grid_res_var, self.saf_lat_up_var, self.saf_lon_left_var, \
         self.saf_lon_right_var, self.saf_lat_down_var, self.reaNames, self.modNames, self.SAFs
 
@@ -665,6 +853,14 @@ class tabDomain(tk.Frame):
 class tabDates(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         tabDates = tk.Frame(notebook)
         notebook.add(tabDates, text='Dates')
         padx = 100
@@ -773,6 +969,13 @@ class tabDates(tk.Frame):
 
         def add_splitMode_button_and_years(text, split_modeName, years, info, irow, icol):
 
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             c = Radiobutton(frameSplitMode, text=str(text), variable=self.split_mode, value=split_modeName,
                             command=lambda: switch_splitMode(split_modeName, self.dict_buttons), takefocus=False)
 
@@ -828,6 +1031,14 @@ class tabDates(tk.Frame):
         # season_dict
         self.seasons = []
         def add_season(xMonth, text, seasonName, irow, icol):
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             monthsVar = tk.StringVar()
             Label(frameSeasons, text=text).grid(sticky="E", column=icol, row=irow, padx=10); icol+=1
             seasonName_Entry = ttk.Entry(frameSeasons, textvariable=monthsVar, width=10, justify='right',
@@ -870,8 +1081,22 @@ class framePredictorsClass(tk.Frame):
 
     def __init__(self, notebook, root, targetVar):
 
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         def add_chk_bt_upperAir(chk_list, pred, irow, icol):
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             """Check buttons for upper air predictors"""
             checked = tk.BooleanVar(value=False)
             if pred in pred_dictIn:
@@ -884,6 +1109,14 @@ class framePredictorsClass(tk.Frame):
 
         def add_chk_bt_singleLevels(chk_list, pred, irow, icol, nrows):
             """Check buttons for single levels predictors"""
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             checked = tk.BooleanVar(value=False)
             if pred in pred_dictIn:
                 checked = tk.BooleanVar(value=True)
@@ -984,6 +1217,14 @@ class framePredictorsClass(tk.Frame):
         tk.Label(root, text='').grid(column=icol, row=irow, pady=5)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.preds
 
 
@@ -991,6 +1232,13 @@ class framePredictorsClass(tk.Frame):
 class frameTargetVarInfoClass(tk.Frame):
 
     def __init__(self, notebook, root, targetVar):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         icol = 0
         irow = 0
@@ -1100,6 +1348,14 @@ class frameTargetVarInfoClass(tk.Frame):
             # myTargetVarIsGaussian_Entry.grid(sticky="W", column=icol, row=irow); icol-=1; irow+=1
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.chk
 
 
@@ -1107,6 +1363,13 @@ class frameTargetVarInfoClass(tk.Frame):
 class frameMethodsClass(tk.Frame):
 
     def __init__(self, notebook, root, targetVar, isGaussian=True):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         self.cbuts = []
         self.chk_list = []
@@ -1122,6 +1385,13 @@ class frameMethodsClass(tk.Frame):
         def add_method_to_chk_list(disabled_methods, methods_chk_list, targetVar, methodName, family, mode, fields, info, icol, irow):
             """This function adds all methods to a list. The checked variable will contain information about their status
             once the mainloop is finished"""
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
 
             # Initialize with default settings or last settings
             checked = tk.BooleanVar(value=False)
@@ -1151,10 +1421,26 @@ class frameMethodsClass(tk.Frame):
             # return self.chk_list
 
         def select_all():
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             for i in self.cbuts:
                 i.select()
 
         def deselect_all():
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             for i in self.cbuts:
                 i.deselect()
 
@@ -1224,6 +1510,14 @@ class frameMethodsClass(tk.Frame):
 
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.chk_list
 
 
@@ -1231,6 +1525,13 @@ class frameMethodsClass(tk.Frame):
 class frameClimdexClass(tk.Frame):
 
     def __init__(self, notebook, root, targetVar):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         self.chk_list = []
 
@@ -1256,10 +1557,26 @@ class frameClimdexClass(tk.Frame):
         buttonWidth = 8
 
         def select_all():
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             for i in cbuts:
                 i.select()
 
         def deselect_all():
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             for i in cbuts:
                 i.deselect()
 
@@ -1496,6 +1813,14 @@ class frameClimdexClass(tk.Frame):
                takefocus=False).grid(sticky="W", column=icol, row=irow, padx=30, columnspan=3); irow += 1
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.chk_list
 
 
@@ -1503,6 +1828,13 @@ class frameClimdexClass(tk.Frame):
 class tabTasmax(tk.Frame):
 
     def __init__(self, notebook):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         targetVar = 'tasmax'
         tab = tk.Frame(notebook)
         notebook.add(tab, text='T1')
@@ -1551,6 +1883,13 @@ class tabTasmax(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -1558,6 +1897,13 @@ class tabTasmax(tk.Frame):
 class tabTasmin(tk.Frame):
 
     def __init__(self, notebook):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         targetVar = 'tasmin'
         tab = tk.Frame(notebook)
         notebook.add(tab, text='T2')
@@ -1607,6 +1953,13 @@ class tabTasmin(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -1614,6 +1967,13 @@ class tabTasmin(tk.Frame):
 class tabTas(tk.Frame):
 
     def __init__(self, notebook):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         targetVar = 'tas'
         tab = tk.Frame(notebook)
         notebook.add(tab, text='T3')
@@ -1663,6 +2023,13 @@ class tabTas(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -1671,6 +2038,12 @@ class tabTas(tk.Frame):
 class tabPr(tk.Frame):
 
     def __init__(self, notebook):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'pr'
         tab = tk.Frame(notebook)
@@ -1721,6 +2094,13 @@ class tabPr(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -1728,6 +2108,13 @@ class tabPr(tk.Frame):
 class tabUas(tk.Frame):
 
     def __init__(self, notebook):
+
+        frame = inspect.currentframe()
+        function_name = inspect.getframeinfo(frame).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'uas'
         tab = tk.Frame(notebook)
@@ -1778,6 +2165,13 @@ class tabUas(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -1785,6 +2179,12 @@ class tabUas(tk.Frame):
 class tabVas(tk.Frame):
 
     def __init__(self, notebook):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'vas'
         tab = tk.Frame(notebook)
@@ -1835,12 +2235,27 @@ class tabVas(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 ########################################################################################################################
 class tabSfcWind(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'sfcWind'
         tab = tk.Frame(notebook)
@@ -1891,6 +2306,14 @@ class tabSfcWind(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -1898,6 +2321,13 @@ class tabSfcWind(tk.Frame):
 class tabHurs(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'hurs'
         tab = tk.Frame(notebook)
@@ -1948,6 +2378,14 @@ class tabHurs(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -1955,6 +2393,13 @@ class tabHurs(tk.Frame):
 class tabHuss(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'huss'
         tab = tk.Frame(notebook)
@@ -2005,6 +2450,14 @@ class tabHuss(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2012,6 +2465,13 @@ class tabHuss(tk.Frame):
 class tabClt(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'clt'
         tab = tk.Frame(notebook)
@@ -2061,6 +2521,14 @@ class tabClt(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2068,6 +2536,13 @@ class tabClt(tk.Frame):
 class tabRsds(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'rsds'
         tab = tk.Frame(notebook)
@@ -2117,6 +2592,14 @@ class tabRsds(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2124,6 +2607,13 @@ class tabRsds(tk.Frame):
 class tabRlds(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'rlds'
         tab = tk.Frame(notebook)
@@ -2173,6 +2663,14 @@ class tabRlds(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2180,6 +2678,13 @@ class tabRlds(tk.Frame):
 class tabEvspsbl(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'evspsbl'
         tab = tk.Frame(notebook)
@@ -2229,6 +2734,14 @@ class tabEvspsbl(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2236,6 +2749,13 @@ class tabEvspsbl(tk.Frame):
 class tabEvspsblpot(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'evspsblpot'
         tab = tk.Frame(notebook)
@@ -2285,6 +2805,14 @@ class tabEvspsblpot(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2293,6 +2821,13 @@ class tabEvspsblpot(tk.Frame):
 class tabPsl(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'psl'
         tab = tk.Frame(notebook)
@@ -2342,6 +2877,14 @@ class tabPsl(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2349,6 +2892,12 @@ class tabPsl(tk.Frame):
 class tabPs(tk.Frame):
 
     def __init__(self, notebook):
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'ps'
         tab = tk.Frame(notebook)
@@ -2398,6 +2947,14 @@ class tabPs(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2405,6 +2962,13 @@ class tabPs(tk.Frame):
 class tabMrro(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'mrro'
         tab = tk.Frame(notebook)
@@ -2454,6 +3018,14 @@ class tabMrro(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2462,6 +3034,13 @@ class tabMrro(tk.Frame):
 class tabMrso(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         targetVar = 'mrso'
         tab = tk.Frame(notebook)
@@ -2511,6 +3090,14 @@ class tabMrso(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2518,6 +3105,13 @@ class tabMrso(tk.Frame):
 class tabMyTargetVar(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
 
         tab = tk.Frame(notebook)
         notebook.add(tab, text='myTargetVar')
@@ -2583,6 +3177,14 @@ class tabMyTargetVar(tk.Frame):
         enable(targetVar in targetVars, frames)
 
     def get(self):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         return self.targetVar_active_var, self.methods_chk_list, self.predictors_chk_list, self.TargetVarInfo_chk_list, self.Climdex_chk_list
 
 
@@ -2590,10 +3192,25 @@ class tabMyTargetVar(tk.Frame):
 class tabFigures(tk.Frame):
 
     def __init__(self, notebook):
+
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         tabFigures = tk.Frame(notebook)
         notebook.add(tabFigures, text='Figures')
 
         def open_figure(imgs):
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
 
             w = 600
             filename = '_'.join((self.fields[0], self.fields[1], self.fields[2], self.fields[3], self.fields[4],
@@ -2655,6 +3272,14 @@ class tabFigures(tk.Frame):
 
         def clear_comboboxes_from(icol, first_time=False):
             """delete fields and clear combobox"""
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             ncols = 6
             irow = 4
             if self.last_defined_field > icol or first_time == True:
@@ -2746,10 +3371,26 @@ class tabFigures(tk.Frame):
         }
 
         def callback_experiment(event):
+
+            roxframe = inspect.currentframe()
+            function_name = inspect.getframeinfo(roxframe).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
+
             clear_comboboxes_from(1)
             self.fields[0] = self.experimentVar.get()
 
             def callback_figType(event):
+
+                roxframe = inspect.currentframe()
+                function_name = inspect.getframeinfo(roxframe).function
+                file_path = os.path.basename(__file__)
+                fname = f"Calling {function_name} in {file_path}\n"
+                roxpath = "roxprint_output.txt"
+                grasptools.roxprint(roxpath, fname)
+
                 clear_comboboxes_from(2)
                 self.fields[1] = self.figTypeVar.get()
 
@@ -2761,18 +3402,50 @@ class tabFigures(tk.Frame):
                 self.l.grid(sticky="W", column=2, row=6, padx=10, pady=10, columnspan=100)
 
                 def callback_var(event):
+
+                    roxframe = inspect.currentframe()
+                    function_name = inspect.getframeinfo(roxframe).function
+                    file_path = os.path.basename(__file__)
+                    fname = f"Calling {function_name} in {file_path}\n"
+                    roxpath = "roxprint_output.txt"
+                    grasptools.roxprint(roxpath, fname)
+
                     clear_comboboxes_from(3)
                     self.fields[2] = self.varVar.get()
 
                     def callback_climdex_pred(event):
+
+                        roxframe = inspect.currentframe()
+                        function_name = inspect.getframeinfo(roxframe).function
+                        file_path = os.path.basename(__file__)
+                        fname = f"Calling {function_name} in {file_path}\n"
+                        roxpath = "roxprint_output.txt"
+                        grasptools.roxprint(roxpath, fname)
+
                         clear_comboboxes_from(4)
                         self.fields[3] = self.climdex_predVar.get()
 
                         def callback_method_model_scene(event):
+
+                            roxframe = inspect.currentframe()
+                            function_name = inspect.getframeinfo(roxframe).function
+                            file_path = os.path.basename(__file__)
+                            fname = f"Calling {function_name} in {file_path}\n"
+                            roxpath = "roxprint_output.txt"
+                            grasptools.roxprint(roxpath, fname)
+
                             clear_comboboxes_from(5)
                             self.fields[4] = self.method_model_sceneVar.get()
 
                             def callback_season(event):
+
+                                roxframe = inspect.currentframe()
+                                function_name = inspect.getframeinfo(roxframe).function
+                                file_path = os.path.basename(__file__)
+                                fname = f"Calling {function_name} in {file_path}\n"
+                                roxpath = "roxprint_output.txt"
+                                grasptools.roxprint(roxpath, fname)
+
                                 self.fields[5] = self.seasonVar.get()
 
                             # season
@@ -2913,6 +3586,13 @@ class selectionWindow():
 
     def __init__(self):
 
+        roxframe = inspect.currentframe()
+        function_name = inspect.getframeinfo(roxframe).function
+        file_path = os.path.basename(__file__)
+        fname = f"Calling {function_name} in {file_path}\n"
+        roxpath = "roxprint_output.txt"
+        grasptools.roxprint(roxpath, fname)
+
         # Welcome message
         run, self.showWelcomeMessage = welcomeMessage().get()
         if run == False:
@@ -3010,6 +3690,13 @@ class selectionWindow():
 
         self.run = False
         def run():
+
+            frame = inspect.currentframe()
+            function_name = inspect.getframeinfo(frame).function
+            file_path = os.path.basename(__file__)
+            fname = f"Calling {function_name} in {file_path}\n"
+            roxpath = "roxprint_output.txt"
+            grasptools.roxprint(roxpath, fname)
 
             self.all_checks_ok = False
 
@@ -3296,7 +3983,7 @@ class selectionWindow():
                 # Write tmp_main file
                 write_tmpMain_file(self.steps)
 
-                os.system('python3 .tmp_main.py')
+                os.system('python .tmp_main.py')
 
                 # Delete tmp_main
                 try:
@@ -3328,6 +4015,13 @@ def write_settings_file(showWelcomeMessage, experiment, targetVars, steps, metho
                         ):
 
     """This function prepares a new settings file with the user selected options"""
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Open f for writing
     f = open('../config/settings.py', "w")
@@ -3375,11 +4069,20 @@ def write_tmpMain_file(steps):
 
     """This function prepares a tmp main file with the user selected options"""
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Open f for writing
     f = open('.tmp_main.py', "w")
 
 
     f.write("import sys\n")
+    # f.write("relative_path = '../config/'\n")
+    # f.write("absolute_path = os.path.abspath(relative_path)\n")
     f.write("sys.path.append('../config/')\n")
     f.write("from imports import *\n")
     f.write("from settings import *\n")
@@ -3434,8 +4137,54 @@ def main():
     This function shows a graphical dialog to select settings and launch the main program.
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Seletcion window
     selectionWindow()
 
-if __name__=="__main__":
+
+import linecache
+
+
+# Custom trace function
+def trace_func(frame, event, arg):
+    if event != "call" and event != "return":
+        return trace_func
+    target_folder = "pyClim"
+    code = frame.f_code
+    file_path = code.co_filename
+    if target_folder in os.path.dirname(file_path):
+        function_name = code.co_name
+        source_line = linecache.getline(code.co_filename, frame.f_lineno).strip()
+        with open("function_calls.log", "a") as log_file:
+            if event == "call":
+                log_file.write(f"Calling {function_name}: in {file_path} at line {frame.f_lineno}: {source_line}\n")
+            elif event == "return":
+                log_file.write(f"Returning {function_name}: in {file_path} at line {frame.f_lineno}: {source_line}\n")
+    return trace_func
+
+#######################################################
+
+
+
+
+#######################################################
+
+
+# Set the custom trace function
+sys.settrace(trace_func)
+
+if __name__ == "__main__":
+    with open("function_calls.log", "a") as log_file:
+        log_file.write("Program started.\n")
     main()
+    with open("function_calls.log", "a") as log_file:
+        log_file.write("Program finished.\n")
+
+    # Disable the custom trace function
+    sys.settrace(None)

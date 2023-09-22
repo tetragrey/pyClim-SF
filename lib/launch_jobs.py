@@ -5,6 +5,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -36,6 +39,12 @@ import write
 ########################################################################################################################
 def wait_maxJobs():
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     message_printed = False
 
@@ -55,6 +64,14 @@ def wait_maxJobs():
 
 ########################################################################################################################
 def info_msg():
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('----------------------------------------------------------------')
     print('You are about to launch a job.')
     print('Different methods might need different number of nodes and memory.')
@@ -69,6 +86,13 @@ def cluster(targetVar, methodName, mode, cluster_option):
     """
     Launch a job for training chunks of clusters / weather types in parallel
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
 
     # Wait max jobs allowed
@@ -114,6 +138,13 @@ def training(targetVar, methodName, family, mode, fields):
     """
     Launch a job for training chunks of grid-points in parallel
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Wait max jobs allowed
     wait_maxJobs()
@@ -176,6 +207,13 @@ def process(targetVar, methodName, family, mode, fields, scene, model):
     Launch a job for training chunks of dates (for ANA/WT) or grid-points (for the rest) in parallel
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Wait max jobs allowed
     wait_maxJobs()
 
@@ -237,6 +275,13 @@ def climdex(model, targetVar, methodName):
     Launch a job for calclulating climdex for each GCM in parallel
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Wait max jobs allowed
     wait_maxJobs()
 
@@ -279,6 +324,13 @@ def biasCorrection(model, targetVar, methodName):
     """
     Launch a job for bias correcting each model in parallel
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Wait max jobs allowed
     wait_maxJobs()

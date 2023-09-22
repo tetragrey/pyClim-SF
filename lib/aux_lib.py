@@ -4,6 +4,9 @@ from imports import *
 from settings import *
 from advanced_settings import *
 
+import grasptools
+import inspect
+
 sys.path.append('../lib/')
 import ANA_lib
 import aux_lib
@@ -38,6 +41,13 @@ def initial_checks():
     Check whether aux, tmp and results folders exist.
     Check for living jobs and kill them (optional)
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     # Create needed paths
     if not os.path.exists('../job/'):
@@ -92,6 +102,13 @@ def check_var_units():
     Check units for the different variables by the reanalysis and by a GCM
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     print('Comparison of reanalysis data with one GCM:')
 
 
@@ -143,6 +160,13 @@ def join_kfolds(var, methodName, family, mode, fields, scene, model, units, hres
     Caution. The folds are joint in the specific order 1-2-3-4-5.
     """
 
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
+
     # Path
     path = '../results/'+experiment+'/'+var.upper()+'/'+methodName+'/daily_data/'
 
@@ -181,6 +205,13 @@ def prepare_hres_data_ascii2npy(targetVar):
     When the original data contain years out of both calibration and reference period they are remove at first_run.
 
     """
+
+    frame = inspect.currentframe()
+    function_name = inspect.getframeinfo(frame).function
+    file_path = os.path.basename(__file__)
+    fname = f"Calling {function_name} in {file_path}\n"
+    roxpath = "roxprint_output.txt"
+    grasptools.roxprint(roxpath, fname)
 
     filename = pathHres + targetVar + '_' + hresPeriodFilename[targetVar]
     fill_value_txt = -999 # This is the value in the txt file, and this function convert it to np.nan for the .npy file
