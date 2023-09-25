@@ -398,11 +398,12 @@ elif len(reanalysisPeriodFilenames) == 1:
 #     ssp_years = (2015, 2100)
 
 #### Start insert
- ssp_years = ()
- if os.path.exists('../input_data/models/'):
+ssp_years = (2081, 2100) # Trying to shove this out of the way by giving it PSEUDOREALITY years, hopefully nothing complains
+if os.path.exists('../input_data/models/'):
      for file in os.listdir('../input_data/models/'):
          if file.endswith(".nc") and file.startswith("SF"):
-
+             historical_years = (int(file[2:6]), int(file[7:11]))
+             historicalPeriodFilename = file # Not very neat. Will end up taking the filename of the last SF file in the folder
 #### End insert
 
 if experiment == 'PSEUDOREALITY':
@@ -415,7 +416,7 @@ longTerm_years = (2071, 2100)
 
 aux_hres_years = (max([int(hresPeriodFilename[x][:4]) for x in targetVars]), min([int(hresPeriodFilename[x][-8:-4]) for x in targetVars]))
 aux_reanalysis_years = (int(reanalysisPeriodFilename[:4]), int(reanalysisPeriodFilename[-8:-4]))
-aux_historical_years = (int(historicalPeriodFilename[:4]), int(historicalPeriodFilename[-8:-4]))
+aux_historical_years = (int(historicalPeriodFilename[2:6]), int(historicalPeriodFilename[7:11])) # Changed this to match SF file name format
 allowedCalibrationYears = (max(aux_hres_years[0], aux_reanalysis_years[0]), min(aux_hres_years[1], aux_reanalysis_years[1]))
 if calibration_years[0] < allowedCalibrationYears[0] or calibration_years[1] > allowedCalibrationYears[1]:
     print('---------------------------------------------------------------------------')

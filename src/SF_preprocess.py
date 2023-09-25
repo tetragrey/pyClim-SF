@@ -18,6 +18,7 @@ folder_path = folder_path +'/' #make sure there's an / at the end or else os.pat
 file_list = os.listdir(folder_path)
 
 # Create empty lists to hold data for each forecast month, to be concatenated later
+yearset = []
 m1datasets = []
 m2datasets = []
 m3datasets = []
@@ -26,6 +27,8 @@ m5datasets = []
 m6datasets = []
 m7datasets = []
 
+ensNumber = 0
+
 # Read each dataset and split it by months, dumping each month into a different list
 for file_name in file_list: # Loop over all files available
     file_path = os.path.join(folder_path, file_name) # Make the filepath for the file
@@ -33,22 +36,30 @@ for file_name in file_list: # Loop over all files available
     # Open the netCDF4 file
     nc_file = netCDF4.Dataset(file_path, 'r')  # open netCDF at file_path
     xdata = xr.open_dataset(xr.backends.NetCDF4DataStore(nc_file)) # Convert it to xarray
-    m1datasets.append(SF_getm(xdata, 1, 0))
-    m2datasets.append(SF_getm(xdata, 2, 0))
-    m3datasets.append(SF_getm(xdata, 3, 0))
-    m4datasets.append(SF_getm(xdata, 4, 0))
-    m5datasets.append(SF_getm(xdata, 5, 0))
-    m6datasets.append(SF_getm(xdata, 6, 0))
-    m7datasets.append(SF_getm(xdata, 7, 0))
+    m1datasets.append(SF_getm(xdata, 1, ensNumber))
+    m2datasets.append(SF_getm(xdata, 2, ensNumber))
+    m3datasets.append(SF_getm(xdata, 3, ensNumber))
+    m4datasets.append(SF_getm(xdata, 4, ensNumber))
+    m5datasets.append(SF_getm(xdata, 5, ensNumber))
+    m6datasets.append(SF_getm(xdata, 6, ensNumber))
+    m7datasets.append(SF_getm(xdata, 7, ensNumber))
+    yearset.append(xdata.isel(time = 0)['time.year'].values)
+    yearset.append(xdata.isel(time = -1)['time.year'].values)
     nc_file.close()
 
+datasetlist = [m1datasets,m2datasets,m3datasets,m4datasets,m5datasets,m6datasets,m7datasets]
+
+# Find initial and final years
+startyear = min(yearset)
+stopyear = max(yearset)
+
 # Concatenate into a GCM-like complete time series, then write to a netCDF in the lres folder
-m1input = xr.concat(m1datasets, dim = 'time')
-m1input.to_netcdf(path = 'C:/Users/alexm/pyClim-SDM_playground/input_data/models/SFm1_ens0.nc', mode = 'w')
-m2input = xr.concat(m1datasets, dim = 'time')
-m3input = xr.concat(m1datasets, dim = 'time')
-m4input = xr.concat(m1datasets, dim = 'time')
-m5input = xr.concat(m1datasets, dim = 'time')
-m6input = xr.concat(m1datasets, dim = 'time')
-m7input = xr.concat(m1datasets, dim = 'time')
-print(m1input)
+month = 0
+while month < 7:
+    input = xr.concat(datasetlist[month], dim = 'time')
+    writename = f"SF{startyear}-{stopyear}m{month+1}_ens{ensNumber}.nc"
+    writepath = os.path.join('C:/Users/alexm/pyClim-SDM_playground/input_data/models/', writename)
+    input.to_netcdf(path = writepath, mode = 'w')
+    month+=1
+
+print('Seasonal forecast data has been preprocessed for downscaling.')
