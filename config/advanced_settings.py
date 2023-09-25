@@ -359,22 +359,23 @@ elif len(reanalysisPeriodFilenames) == 1:
 
 # Detect historicalPeriodFilename, sspPeriodFilename, historical_years  and ssp_years
 # historicalPeriodFilenames = []
-# sspPeriodFilenames = []
-# if os.path.exists('../input_data/models/'):
-#     for file in os.listdir('../input_data/models/'):
-#         if file.endswith(".nc"):
-#             aux = file.split('_')[-1].split('.')[0]
-#             if aux[4:8] != '0101' or aux[-4:] != '1231':
-#                 print('Invalid filename at input_data/models/: ' + file)
-#                 print('Please, modify filename')
-#                 exit()
-#             else:
-#                 if 'historical' in file:
-#                     if aux not in historicalPeriodFilenames:
-#                         historicalPeriodFilenames.append(aux)
-#                 else:
-#                     if aux not in sspPeriodFilenames:
-#                         sspPeriodFilenames.append(aux)
+sspPeriodFilenames = []
+if os.path.exists('../input_data/models/'):
+    for file in os.listdir('../input_data/models/'):
+        if file.endswith(".nc"):
+            aux = file.split('_')[-1].split('.')[0]
+            if aux[4:8] != '0101' or aux[-4:] != '1231':
+                print('Invalid filename at input_data/models/: ' + file)
+                print('Please, modify filename')
+                exit()
+            else:
+                if 'historical' in file:
+                    print('ignoring the historical file called ', file)
+                    # if aux not in historicalPeriodFilenames:
+                    #     historicalPeriodFilenames.append(aux)
+                else:
+                    if aux not in sspPeriodFilenames:
+                        sspPeriodFilenames.append(aux)
 # if len(historicalPeriodFilenames) > 1:
 #     print('Different periods detected at input_data/models/: ' + historicalPeriodFilenames)
 #     print('Please, modify filenames so all files contain the same period.')
@@ -386,19 +387,19 @@ elif len(reanalysisPeriodFilenames) == 1:
 #     historicalPeriodFilename = ''
 #     historical_years = (1950, 2014)
 
-# if len(sspPeriodFilenames) > 1:
-#     print('Different periods detected at input_data/models/: ' + sspPeriodFilenames)
-#     print('Please, modify filenames so all files contain the same period.')
-#     exit()
-# elif len(sspPeriodFilenames) == 1:
-#     sspPeriodFilename = sspPeriodFilenames[0]
-#     ssp_years = (int(sspPeriodFilenames[0][:4]), int(sspPeriodFilenames[0][9:13]))
-# elif len(sspPeriodFilenames) == 0:
-#     sspPeriodFilename = ''
-#     ssp_years = (2015, 2100)
+if len(sspPeriodFilenames) > 1:
+    print('Different periods detected at input_data/models/: ' + sspPeriodFilenames)
+    print('Please, modify filenames so all files contain the same period.')
+    exit()
+elif len(sspPeriodFilenames) == 1:
+    sspPeriodFilename = sspPeriodFilenames[0]
+    ssp_years = (int(sspPeriodFilenames[0][:4]), int(sspPeriodFilenames[0][9:13]))
+elif len(sspPeriodFilenames) == 0:
+    sspPeriodFilename = ''
+    ssp_years = (2015, 2100)
 
 #### Start insert
-ssp_years = (2081, 2100) # Trying to shove this out of the way by giving it PSEUDOREALITY years, hopefully nothing complains
+# ssp_years = (2081, 2100) # Trying to shove this out of the way by giving it PSEUDOREALITY years, hopefully nothing complains (never mind, read needs sspPeriodFilenames)
 if os.path.exists('../input_data/models/'):
      for file in os.listdir('../input_data/models/'):
          if file.endswith(".nc") and file.startswith("SF"):
