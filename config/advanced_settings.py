@@ -365,9 +365,10 @@ if os.path.exists('../input_data/models/'):
         if file.endswith(".nc"):
             aux = file.split('_')[-1].split('.')[0]
             if aux[4:8] != '0101' or aux[-4:] != '1231':
-                print('Invalid filename at input_data/models/: ' + file)
-                print('Please, modify filename')
-                exit()
+                # print('Invalid filename at input_data/models/: ' + file)
+                # print('Please, modify filename')
+                # exit()
+                print('This is the part where advanced_settings wants to quit because the SF models are formatted weird')
             else:
                 if 'historical' in file:
                     print('ignoring the historical file called ', file)
