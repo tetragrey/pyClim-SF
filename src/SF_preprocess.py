@@ -36,6 +36,7 @@ for file_name in file_list: # Loop over all files available
     # Open the netCDF4 file
     nc_file = netCDF4.Dataset(file_path, 'r')  # open netCDF at file_path
     xdata = xr.open_dataset(xr.backends.NetCDF4DataStore(nc_file)) # Convert it to xarray
+    xdata = xdata.rename_vars({'tp': 'pr'}) # Change variable name to pr so read.netCDF doesn't freak out. Hopefully later read.netCDF can be patched to accept 'tp'.
     m1datasets.append(SF_getm(xdata, 1, ensNumber))
     m2datasets.append(SF_getm(xdata, 2, ensNumber))
     m3datasets.append(SF_getm(xdata, 3, ensNumber))
