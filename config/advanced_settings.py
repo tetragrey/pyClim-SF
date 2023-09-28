@@ -724,10 +724,10 @@ hres_lats_all = np.asarray(hres_lats_all)
 hres_lons_all = np.asarray(hres_lons_all)
 
 # Modify saf_lat_up, saf_lat_down, saf_lon_left and saf_lon_right forcing to exist in the netCDF files
-for file in os.listdir('../input_data/reanalysis/'):
-    if file.endswith(".nc"):
+for file in os.listdir('../input_data/models/'):
+    if file.endswith(".nc") and file.startswith('SF'):
         try:
-            nc = Dataset('../input_data/reanalysis/'+file)
+            nc = Dataset('../input_data/models/'+file)
             break
         except:
             pass
