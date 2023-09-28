@@ -2,6 +2,10 @@ import netCDF4
 import xarray as xr
 import os
 
+'''
+Accepts SF data files organized into a folder. Each file must have one year of data.
+'''
+
 def SF_getm(SFdata, SFmonth, ensNumber):
     '''Returns data only for the desired month and ensemble member'''
     mgroups = SFdata.groupby('time.month').groups # Turn each month into a group
@@ -11,7 +15,7 @@ def SF_getm(SFdata, SFmonth, ensNumber):
 
 
 
-folder_path = 'C:/Users/alexm/OneDrive/Documents/WaterJade/Downscaling/data/'
+folder_path = 'C:/Users/alexm/OneDrive/Documents/WaterJade/Downscaling/data/' # Insert the file path to your own seasonal forecast data here
 folder_path = folder_path +'/' #make sure there's an / at the end or else os.path.join will add a \ instead. Having a // is ok
 
 # Use os.listdir() to get a list of all files in the folder
